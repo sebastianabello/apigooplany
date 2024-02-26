@@ -1,5 +1,5 @@
 # Crud Tienda de mascotas
-![Descripción de la imagen](.src/main/java/org/example/Captura desde 2024-02-26 18-50-59.png) 
+![Descripción de la imagen](./src/main/java/org/example/diagrama.png) 
 ## Base de datos:
 - Crear la base de datos  
 CREATE DATABASE tienda_mascotas;
