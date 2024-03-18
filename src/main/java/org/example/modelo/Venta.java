@@ -4,24 +4,18 @@ import java.util.Date;
 
 public class Venta {
     private int idVenta;
-    private Mascota mascota;
     private Cliente cliente;
-    private Date fechaVenta;
-    private double total;
+    private Mascota mascota;
+    private Date fecha;
 
     public Venta() {
     }
 
-    public Venta(int idVenta, Mascota mascota, Cliente cliente, Date fechaVenta, double total) {
+    public Venta(int idVenta, Cliente cliente, Mascota mascota, Date fecha) {
         this.idVenta = idVenta;
-        this.mascota = mascota;
         this.cliente = cliente;
-        this.fechaVenta = fechaVenta;
-        this.total = total;
-    }
-
-    public Venta(Cliente cliente) {
-
+        this.mascota = mascota;
+        this.fecha = fecha;
     }
 
     public int getIdVenta() {
@@ -32,14 +26,6 @@ public class Venta {
         this.idVenta = idVenta;
     }
 
-    public Mascota getMascota() {
-        return mascota;
-    }
-
-    public void setMascota(Mascota mascota) {
-        this.mascota = mascota;
-    }
-
     public Cliente getCliente() {
         return cliente;
     }
@@ -48,19 +34,19 @@ public class Venta {
         this.cliente = cliente;
     }
 
-    public Date getFechaVenta() {
-        return fechaVenta;
+    public Mascota getMascota() {
+        return mascota;
     }
 
-    public void setFechaVenta(Date fechaVenta) {
-        this.fechaVenta = fechaVenta;
+    public void setMascota(Mascota mascota) {
+        this.mascota = mascota;
     }
 
-    public double getTotal() {
-        return total;
+    public Date getFecha() {
+        return fecha;
     }
 
-    public void setTotal(double total) {
-        this.total = total;
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
 }

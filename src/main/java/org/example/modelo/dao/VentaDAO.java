@@ -12,67 +12,44 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
-public class VentaDAO {
+public class VentaDAO implements Almacenamiento {
     private Connection connection;
 
     public VentaDAO() {
         connection = ConexionDB.getConnection();
     }
 
-    public void create(Venta venta) {
-        String sql = "INSERT INTO Ventas (id_mascota, id_cliente, fecha_venta, total) VALUES (?, ?, ?, ?)";
+    @Override
+    public void create(Object obj) {
+        Venta venta = (Venta) obj;
+        String sql = "INSERT INTO Ventas (id_cliente, id_mascota, fecha) VALUES (?, ?, ?)";
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setInt(1, venta.getMascota().getIdMascota());
-            statement.setInt(2, venta.getCliente().getIdCliente());
-            statement.setDate(3, new java.sql.Date(venta.getFechaVenta().getTime()));
-            statement.setDouble(4, venta.getTotal());
+            statement.setInt(1, venta.getCliente().getIdCliente());
+            statement.setInt(2, venta.getMascota().getIdMascota());
+            statement.setDate(3, new java.sql.Date(venta.getFecha().getTime()));
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public List<Venta> readAll() {
-        List<Venta> ventas = new ArrayList<>();
-        String sql = "SELECT * FROM Ventas";
-        try {
-            PreparedStatement statement = connection.prepareStatement(sql);
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                Venta venta = new Venta();
-                venta.setIdVenta(resultSet.getInt("id_venta"));
-                Mascota mascota = new MascotaDAO().read(resultSet.getInt("id_mascota"));
-                venta.setMascota(mascota);
-                Cliente cliente = new ClienteDAO().read(resultSet.getInt("id_cliente"));
-                venta.setCliente(cliente);
-                venta.setFechaVenta(resultSet.getDate("fecha_venta"));
-                venta.setTotal(resultSet.getDouble("total"));
-                ventas.add(venta);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return ventas;
-    }
-
-    public Venta read(int idVenta) {
+    @Override
+    public Object read(int id) {
         Venta venta = null;
         String sql = "SELECT * FROM Ventas WHERE id_venta = ?";
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setInt(1, idVenta);
+            statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 venta = new Venta();
                 venta.setIdVenta(resultSet.getInt("id_venta"));
-                Mascota mascota = new MascotaDAO().read(resultSet.getInt("id_mascota"));
-                venta.setMascota(mascota);
                 Cliente cliente = new ClienteDAO().read(resultSet.getInt("id_cliente"));
                 venta.setCliente(cliente);
-                venta.setFechaVenta(resultSet.getDate("fecha_venta"));
-                venta.setTotal(resultSet.getDouble("total"));
+                Mascota mascota = new MascotaDAO().read(resultSet.getInt("id_mascota"));
+                venta.setMascota(mascota);
+                venta.setFecha(resultSet.getDate("fecha"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -80,40 +57,31 @@ public class VentaDAO {
         return venta;
     }
 
-    public void update(Venta venta) {
-        String sql = "UPDATE Ventas SET id_mascota = ?, id_cliente = ?, fecha_venta = ?, total = ? WHERE id_venta = ?";
+    @Override
+    public void update(Object obj) {
+        Venta venta = (Venta) obj;
+        String sql = "UPDATE Ventas SET id_cliente = ?, id_mascota = ?, fecha = ? WHERE id_venta = ?";
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setInt(1, venta.getMascota().getIdMascota());
-            statement.setInt(2, venta.getCliente().getIdCliente());
-            statement.setDate(3, new java.sql.Date(venta.getFechaVenta().getTime()));
-            statement.setDouble(4, venta.getTotal());
-            statement.setInt(5, venta.getIdVenta());
+            statement.setInt(1, venta.getCliente().getIdCliente());
+            statement.setInt(2, venta.getMascota().getIdMascota());
+            statement.setDate(3, new java.sql.Date(venta.getFecha().getTime()));
+            statement.setInt(4, venta.getIdVenta());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-    public void delete(int idVenta) {
+
+    @Override
+    public void delete(int id) {
         String sql = "DELETE FROM Ventas WHERE id_venta = ?";
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setInt(1, idVenta);
+            statement.setInt(1, id);
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-    public void guardar(Venta venta) {
-        String sql = "INSERT INTO ventas (cliente_id) VALUES (?)";
-
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setInt(1, venta.getCliente().getIdCliente());
-
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
 }

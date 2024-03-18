@@ -271,11 +271,5 @@ public class Vista {
             System.out.println();
         }
     }
-    public static void main(String[] args) {
-        Vista vista = new Vista();
-        vista.menu();
-    }
-
-
 
 }

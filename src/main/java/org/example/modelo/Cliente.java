@@ -7,7 +7,6 @@ public class Cliente {
     private String correo;
 
     public Cliente(){
-
     }
 
     public Cliente(int idCliente, String nombre, String telefono, String correo) {
@@ -15,10 +14,6 @@ public class Cliente {
         this.nombre = nombre;
         this.telefono = telefono;
         this.correo = correo;
-    }
-
-    public Cliente(String nombre) {
-        this.nombre = nombre;
     }
 
     public int getIdCliente() {
