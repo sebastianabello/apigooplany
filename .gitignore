@@ -1,3 +1,5 @@
+src/main/resources/files/*
+src/main/resources/QRCode/*
 .idea/
 target/
 !.mvn/wrapper/maven-wrapper.jar

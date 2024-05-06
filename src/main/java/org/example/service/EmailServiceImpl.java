@@ -15,7 +15,7 @@ import java.io.File;
 @Service
 public class EmailServiceImpl implements IEmailService {
 
-    @Value("${email.sender}")
+    @Value("${spring.mail.username}")
     private String emailUser;
 
     @Autowired
