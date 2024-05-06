@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.example.service.QRCodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,11 +13,12 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 
 @RestController
+@RequestMapping("/api/v1")
 public class QRCodeController {
     @Autowired
     private QRCodeService qrCodeService;
 
-    @GetMapping("/v1/qrcode")
+    @GetMapping("/qrcode")
     public void generateQRCode(HttpServletResponse response,
                                @RequestParam String text,
                                @RequestParam(defaultValue = "350") int width,
