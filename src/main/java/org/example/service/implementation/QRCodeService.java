@@ -1,4 +1,4 @@
-package org.example.service;
+package org.example.service.implementation;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.client.j2se.MatrixToImageConfig;

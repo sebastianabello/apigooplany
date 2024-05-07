@@ -1,14 +1,13 @@
-package org.example.controller;
+package org.example.presentation.controller;
 
 import com.google.zxing.WriterException;
 import lombok.RequiredArgsConstructor;
-import org.example.domain.EmailDTO;
-import org.example.domain.EmailFileDTO;
-import org.example.domain.User;
-import org.example.service.IEmailService;
-import org.example.service.UserService;
+import org.example.presentation.dto.EmailDTO;
+import org.example.presentation.dto.EmailFileDTO;
+import org.example.presentation.dto.UserDTO;
+import org.example.service.interfaces.IEmailService;
+import org.example.service.interfaces.IUserService;
 import org.example.utils.QRCodeGenerator;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,13 +22,12 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/v1")
 public class MailController {
 
-    @Autowired
-    private IEmailService emailService;
-    @Autowired
-    private UserService userService;
+    private final IEmailService emailService;
+    private final IUserService userService;
 
     @PostMapping("/sendMessage")
     public ResponseEntity<?> receiveMail(@RequestBody EmailDTO emailDTO) {
@@ -78,31 +76,29 @@ public class MailController {
         System.out.println("Mensaje Recibido" + emailDTO);
 
         // Obtener todos los usuarios
-        List<User> users = userService.getUsers();
+        List<UserDTO> users = userService.findAll();
 
-        // Extraer los correos electrónicos de los usuarios
         String[] emails = users.stream()
-                .map(User::getEmail)
+                .map(UserDTO::getEmail)
                 .toArray(String[]::new);
 
-        // Enviar el correo a todos los usuarios
         emailService.sendEmail(emails, emailDTO.getSubject(), emailDTO.getText());
 
         Map<String, String> response = new HashMap<>();
-        response.put("estado", "Mail Enviado");
+        response.put("estado", "Mail Enviado a todos los usuarios");
 
         return ResponseEntity.ok(response);
-
     }
+
     @PostMapping("/sendMessageAllWithQR")
     public ResponseEntity<?> receiveMailAllWithQR(@RequestBody EmailDTO emailDTO) {
 
         System.out.println("Mensaje Recibido" + emailDTO);
 
         // Obtener todos los usuarios
-        List<User> users = userService.getUsers();
+        List<UserDTO> users = userService.findAll();
 
-        for (User user : users) {
+        for (UserDTO user : users) {
             // Generar el código QR para el usuario
             String qrCodePath;
             try {
@@ -111,7 +107,6 @@ public class MailController {
                 e.printStackTrace();
                 return ResponseEntity.badRequest().body("Error al generar el código QR");
             }
-
             // Enviar el correo al usuario con el código QR adjunto
             emailService.sendEmailWithFile(new String[]{user.getEmail()}, emailDTO.getSubject(), emailDTO.getText(), new File(qrCodePath));
         }
@@ -121,4 +116,6 @@ public class MailController {
 
         return ResponseEntity.ok(response);
     }
+
+
 }
