@@ -2,7 +2,7 @@ package org.example.service.implementation;
 
 import lombok.RequiredArgsConstructor;
 import org.example.persistence.dao.interfaces.IUserDAO;
-import org.example.persistence.entity.UserEntity;
+import org.example.services.user.model.User;
 import org.example.presentation.dto.UserDTO;
 import org.example.service.interfaces.IUserService;
 import org.modelmapper.ModelMapper;
@@ -24,13 +24,13 @@ public class UserServiceImpl implements IUserService {
 
         return this.userDAO.findAll()
                 .stream()
-                .map(userEntity -> modelMapper.map(userEntity, UserDTO.class))
+                .map(user -> modelMapper.map(user, UserDTO.class))
                 .toList();
     }
 
     @Override
     public UserDTO findById(Long id) {
-        Optional<UserEntity> userEntity = this.userDAO.findById(id);
+        Optional<User> userEntity = this.userDAO.findById(id);
         if (userEntity.isPresent()) {
             return new ModelMapper().map(userEntity.get(), UserDTO.class);
         } else {
@@ -42,8 +42,8 @@ public class UserServiceImpl implements IUserService {
     public UserDTO createUser(UserDTO userDTO) {
         try {
             ModelMapper modelMapper = new ModelMapper();
-            UserEntity userEntity = modelMapper.map(userDTO, UserEntity.class);
-            this.userDAO.saveUser(userEntity);
+            User user = modelMapper.map(userDTO, User.class);
+            this.userDAO.saveUser(user);
             return userDTO;
         } catch (Exception e) {
             throw new UnsupportedOperationException("Error al crear el usuario");
@@ -52,17 +52,17 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public UserDTO updateUser(Long id, UserDTO userDTO) {
-        Optional<UserEntity> userEntity = this.userDAO.findById(id);
+        Optional<User> userEntity = this.userDAO.findById(id);
 
         if (userEntity.isPresent()) {
-            UserEntity userEntityToUpdate = userEntity.get();
-            userEntityToUpdate.setFirstName(userDTO.getFirstName());
-            userEntityToUpdate.setLastName(userDTO.getLastName());
-            userEntityToUpdate.setEmail(userDTO.getEmail());
-            userEntityToUpdate.setMobile(userDTO.getMobile());
-            this.userDAO.updateUser(userEntityToUpdate);
+            User userToUpdate = userEntity.get();
+            userToUpdate.setFirstName(userDTO.getFirstName());
+            userToUpdate.setLastName(userDTO.getLastName());
+            userToUpdate.setEmail(userDTO.getEmail());
+            userToUpdate.setMobile(userDTO.getMobile());
+            this.userDAO.updateUser(userToUpdate);
             ModelMapper modelMapper = new ModelMapper();
-            return modelMapper.map(userEntityToUpdate, UserDTO.class);
+            return modelMapper.map(userToUpdate, UserDTO.class);
         } else {
             throw new IllegalArgumentException("El usuario no existe");
         }
@@ -70,7 +70,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public String deleteUser(Long id) {
-        Optional<UserEntity> userEntity = this.userDAO.findById(id);
+        Optional<User> userEntity = this.userDAO.findById(id);
         if (userEntity.isPresent()) {
             this.userDAO.deleteUser(userEntity.get());
             return "Usuario con ID " + id + " ha sido eliminado";

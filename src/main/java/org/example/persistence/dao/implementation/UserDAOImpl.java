@@ -3,7 +3,7 @@ package org.example.persistence.dao.implementation;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.example.persistence.dao.interfaces.IUserDAO;
-import org.example.persistence.entity.UserEntity;
+import org.example.services.user.model.User;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,32 +20,32 @@ public class UserDAOImpl implements IUserDAO {
 
     @Override
     @Transactional(readOnly = true)
-    public List<UserEntity> findAll() {
-        return this.em.createQuery("SELECT u FROM UserEntity u", UserEntity.class).getResultList();
+    public List<User> findAll() {
+        return this.em.createQuery("SELECT u FROM User u", User.class).getResultList();
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<UserEntity> findById(Long id) {
-        return Optional.ofNullable(this.em.find(UserEntity.class, id));
+    public Optional<User> findById(Long id) {
+        return Optional.ofNullable(this.em.find(User.class, id));
     }
 
     @Override
     @Transactional
-    public void saveUser(UserEntity userEntity) {
-        this.em.persist(userEntity);
+    public void saveUser(User user) {
+        this.em.persist(user);
         this.em.flush();
     }
 
     @Override
     @Transactional
-    public void updateUser(UserEntity userEntity) {
-        this.em.merge(userEntity);
+    public void updateUser(User user) {
+        this.em.merge(user);
     }
 
     @Override
     @Transactional
-    public void deleteUser(UserEntity userEntity) {
-        this.em.remove(userEntity);
+    public void deleteUser(User user) {
+        this.em.remove(user);
     }
 }

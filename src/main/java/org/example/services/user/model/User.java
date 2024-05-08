@@ -1,4 +1,4 @@
-package org.example.persistence.entity;
+package org.example.services.user.model;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -6,12 +6,9 @@ import lombok.*;
 
 @Getter
 @Setter
-@Builder
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "users")
-public class UserEntity {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,4 +20,8 @@ public class UserEntity {
     private String lastName;
     private String email;
     private String mobile;
+    private Long eventId;
+
+    @OneToOne(mappedBy = "user",cascade = CascadeType.ALL)
+    private Profile profile;
 }
