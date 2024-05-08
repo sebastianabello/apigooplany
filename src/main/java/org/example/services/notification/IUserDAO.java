@@ -1,4 +1,4 @@
-package org.example.persistence.dao.interfaces;
+package org.example.services.notification;
 
 import org.example.services.user.model.User;
 

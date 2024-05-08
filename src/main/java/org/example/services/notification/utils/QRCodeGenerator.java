@@ -1,11 +1,11 @@
-package org.example.utils;
+package org.example.services.notification.utils;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
-import org.example.presentation.dto.UserDTO;
+import org.example.services.notification.presentation.dto.UserDTO;
 
 import java.io.IOException;
 import java.nio.file.FileSystems;

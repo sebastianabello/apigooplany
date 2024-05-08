@@ -1,8 +1,8 @@
-package org.example.presentation.controller;
+package org.example.services.notification.presentation.controller;
 
 import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletResponse;
-import org.example.service.implementation.QRCodeService;
+import org.example.services.notification.service.implementation.QRCodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

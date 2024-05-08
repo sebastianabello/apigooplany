@@ -1,8 +1,8 @@
-package org.example.service.implementation;
+package org.example.services.notification.service.implementation;
 
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
-import org.example.service.interfaces.IEmailService;
+import org.example.services.notification.service.interfaces.IEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;

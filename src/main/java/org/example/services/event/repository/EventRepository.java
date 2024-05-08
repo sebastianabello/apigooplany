@@ -24,7 +24,7 @@ public interface EventRepository extends JpaRepository<Event, Long> {
     List<EventDTO> findByCompanyId(Long companyId);
 
 
-    void deleteByCompanyId(String companyId);
+    void deleteByCompanyId(Long companyId);
 
 
 }

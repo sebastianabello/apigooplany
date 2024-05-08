@@ -1,4 +1,4 @@
-package org.example.presentation.dto;
+package org.example.services.notification.presentation.dto;
 
 import lombok.*;
 

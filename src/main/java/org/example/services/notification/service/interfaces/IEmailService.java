@@ -1,4 +1,4 @@
-package org.example.service.interfaces;
+package org.example.services.notification.service.interfaces;
 
 import java.io.File;
 

@@ -1,4 +1,4 @@
-package org.example.presentation.dto;
+package org.example.services.notification;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

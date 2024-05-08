@@ -1,13 +1,13 @@
-package org.example.presentation.controller;
+package org.example.services.notification.presentation.controller;
 
 import com.google.zxing.WriterException;
 import lombok.RequiredArgsConstructor;
-import org.example.presentation.dto.EmailDTO;
-import org.example.presentation.dto.EmailFileDTO;
-import org.example.presentation.dto.UserDTO;
-import org.example.service.interfaces.IEmailService;
-import org.example.service.interfaces.IUserService;
-import org.example.utils.QRCodeGenerator;
+import org.example.services.notification.EmailDTO;
+import org.example.services.notification.EmailFileDTO;
+import org.example.services.notification.presentation.dto.UserDTO;
+import org.example.services.notification.service.interfaces.IEmailService;
+import org.example.services.notification.service.interfaces.IUserService;
+import org.example.services.notification.utils.QRCodeGenerator;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

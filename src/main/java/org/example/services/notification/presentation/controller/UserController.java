@@ -1,9 +1,9 @@
-package org.example.presentation.controller;
+package org.example.services.notification.presentation.controller;
 
 
 import lombok.RequiredArgsConstructor;
-import org.example.presentation.dto.UserDTO;
-import org.example.service.interfaces.IUserService;
+import org.example.services.notification.presentation.dto.UserDTO;
+import org.example.services.notification.service.interfaces.IUserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

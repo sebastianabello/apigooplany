@@ -1,6 +1,5 @@
 package org.example.services.company.management;
 
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.example.services.company.CompanyDTO;
 import org.example.services.company.CompanyExternalAPI;
