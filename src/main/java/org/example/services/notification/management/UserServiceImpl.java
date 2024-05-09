@@ -1,9 +1,9 @@
-package org.example.services.notification.service.implementation;
+package org.example.services.notification.management;
 
 import lombok.RequiredArgsConstructor;
-import org.example.services.notification.IUserDAO;
+import org.example.services.notification.service.interfaces.IUserDAO;
 import org.example.services.user.model.User;
-import org.example.services.notification.presentation.dto.UserDTO;
+import org.example.services.notification.dto.UserDTO;
 import org.example.services.notification.service.interfaces.IUserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;

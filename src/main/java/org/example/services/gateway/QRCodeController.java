@@ -1,4 +1,4 @@
-package org.example.services.notification.presentation.controller;
+package org.example.services.gateway;
 
 import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletResponse;

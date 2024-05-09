@@ -1,10 +1,10 @@
-package org.example.services.notification.presentation.controller;
+package org.example.services.gateway;
 
 import com.google.zxing.WriterException;
 import lombok.RequiredArgsConstructor;
 import org.example.services.notification.EmailDTO;
 import org.example.services.notification.EmailFileDTO;
-import org.example.services.notification.presentation.dto.UserDTO;
+import org.example.services.notification.dto.UserDTO;
 import org.example.services.notification.service.interfaces.IEmailService;
 import org.example.services.notification.service.interfaces.IUserService;
 import org.example.services.notification.utils.QRCodeGenerator;
@@ -85,7 +85,7 @@ public class MailController {
         emailService.sendEmail(emails, emailDTO.getSubject(), emailDTO.getText());
 
         Map<String, String> response = new HashMap<>();
-        response.put("estado", "Mail Enviado a todos los usuarios");
+        response.put("estado", "Mail Enviado a todos los usuarios participantes en el evento");
 
         return ResponseEntity.ok(response);
     }

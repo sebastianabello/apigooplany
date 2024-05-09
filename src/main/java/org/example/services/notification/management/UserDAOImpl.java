@@ -2,7 +2,7 @@ package org.example.services.notification.management;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import org.example.services.notification.IUserDAO;
+import org.example.services.notification.service.interfaces.IUserDAO;
 import org.example.services.user.model.User;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;

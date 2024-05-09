@@ -1,4 +1,4 @@
-package org.example.services.notification;
+package org.example.services.notification.service.interfaces;
 
 import org.example.services.user.model.User;
 

@@ -1,6 +1,6 @@
 package org.example.services.notification.service.interfaces;
 
-import org.example.services.notification.presentation.dto.UserDTO;
+import org.example.services.notification.dto.UserDTO;
 
 import java.util.List;
 

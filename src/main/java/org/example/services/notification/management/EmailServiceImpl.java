@@ -1,4 +1,4 @@
-package org.example.services.notification.service.implementation;
+package org.example.services.notification.management;
 
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
